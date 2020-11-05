@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView layoutX="16.0" layoutY="54.0" prefHeight="312.0" prefWidth="277.0" />
+      <TextField layoutX="16.0" layoutY="14.0" prefHeight="25.0" prefWidth="550.0" />
+      <Button layoutX="585.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Search" />
+   </children>
+</AnchorPane>
