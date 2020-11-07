@@ -1,20 +1,27 @@
 package GUI;
 
-import javafx.fxml.Initializable;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import DAL.MovieDAO;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.util.Callback;
 
-public class Controller implements Initializable {
+import java.io.IOException;
 
-    private MovieModel movieModel;
+public class Controller {
+    @FXML
+    private ListView moviesList;
 
-    public Controller(MovieModel movieModel) {
-        this.movieModel = movieModel;
-    }
+    @FXML
+    private Button searchButton;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    private MovieDAO movieDAO;
 
+
+    public void searchAllMovies(ActionEvent event) {
+        moviesList.getItems().add("test");
     }
 }
