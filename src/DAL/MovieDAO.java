@@ -2,10 +2,7 @@ package DAL;
 
 import BE.Movie;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +14,34 @@ public class MovieDAO implements IMovieDataAccess {
 
     private static final String MOVIE_SOURCE =
             "D:\\onedrive2\\OneDrive - Erhvervsakademi Sydvest\\" +
-                    "week 45\\netfilx\\Netflix_project\\data\\movie_titles";
+                    "week 45\\netfilx\\Netflix_project\\data\\movie_titles.txt";
 
-    public List<Movie> getAllMovies() throws IOException {
-        List<Movie> movies = new ArrayList<>();
 
-        BufferedReader br =  new BufferedReader(new FileReader(MOVIE_SOURCE));
 
-        String contentLine;
-        while((contentLine= br.readLine() )!= null)
+    public List<Movie> getAllMovies()  {
+        List<Movie> allMovies = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(new File(MOVIE_SOURCE))))
         {
-           movies.add(makeObjectFromString(contentLine));
+            boolean hasLines = true;
+            while(hasLines){
+                String line = br.readLine();
+                if(line==null)
+                    hasLines=false;
+                if(hasLines)
+                {
+                  try{  allMovies.add(makeObjectFromString(line));} catch (NumberFormatException e) {
+                      //e.printStackTrace();
+                      System.out.println("Number format exception: "+ line);
+                  }
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return movies;
+        return allMovies;
     }
 
     private Movie makeObjectFromString(String line)
