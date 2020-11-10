@@ -11,6 +11,7 @@ public class Movie {
         this.year = year;
     }
 
+
     public int getId() {
         return id;
     }
@@ -33,13 +34,6 @@ public class Movie {
 
     @Override
     public String toString() {
-       /* return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", year=" + year +
-                '}';
-
-        */
         return "ID:" + id +" title: " + title + " year: "+ year;
     }
 }

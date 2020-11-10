@@ -15,5 +15,6 @@ public class MovieManager {
         movieDAO = new MovieDAO();
     }
     public List<Movie> getAllMovies() throws IOException {return movieDAO.getAllMovies();}
+    public List<Movie> searchForTheMovies(String text) { return movieDAO.searchForTheMovies(text);}
 
 }

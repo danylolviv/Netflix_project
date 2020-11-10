@@ -6,10 +6,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MovieModel {
     private ObservableList moviesToBeViewed;
     private MovieManager movieManager;
+
 
     public MovieModel(){
         movieManager = new MovieManager();
@@ -23,4 +25,5 @@ public class MovieModel {
     public ObservableList<Movie> getObservableMovies(){
         return moviesToBeViewed;
     }
+    public List<Movie> getFoundMovies(String text){ return movieManager.searchForTheMovies(text);}
 }

@@ -43,6 +43,38 @@ public class MovieDAO implements IMovieDataAccess {
         }
         return allMovies;
     }
+    public List<Movie> searchForTheMovies(String text)
+    {
+        List<Movie> foundMovies = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(new File(MOVIE_SOURCE))))
+        {
+            boolean hasLines = true;
+            while(hasLines){
+                String line = br.readLine();
+                if(line==null)
+                    hasLines=false;
+                if(hasLines)
+                {
+                    //check if current line contains the text
+                    //if yes add that movie to the ArrayList
+                    if(line.contains(text))
+                    {
+                        try{  foundMovies.add(makeObjectFromString(line));} catch (NumberFormatException e) {
+                            //e.printStackTrace();
+                            System.out.println("Number format exception: "+ line);
+                        }
+
+                    }
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return foundMovies;
+    }
 
     private Movie makeObjectFromString(String line)
     {
@@ -54,6 +86,8 @@ public class MovieDAO implements IMovieDataAccess {
         Movie movie = new Movie(id, title, year);
         return movie;
     }
+
+
 
 }
 
