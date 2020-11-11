@@ -1,4 +1,4 @@
-package GUI;
+package GUI.Model;
 
 import BE.Movie;
 import BLL.MovieManager;
