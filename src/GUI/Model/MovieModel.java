@@ -26,4 +26,9 @@ public class MovieModel {
         return moviesToBeViewed;
     }
     public List<Movie> getFoundMovies(String text){ return movieManager.searchForTheMovies(text);}
+
+    public void addMovie(Movie movie)
+    {
+        moviesToBeViewed.add(movie);
+    }
 }

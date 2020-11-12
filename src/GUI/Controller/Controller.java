@@ -74,7 +74,7 @@ public class Controller implements Initializable {
     }
     @FXML
     private void CreateMovieWindow(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/View/createWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/GUI/View/createWindow.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Add new movies");
         stage.setScene(new Scene(root));
