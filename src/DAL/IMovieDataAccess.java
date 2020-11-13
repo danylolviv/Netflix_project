@@ -10,4 +10,6 @@ public interface IMovieDataAccess {
     public List<Movie> searchForTheMovies(String text);
 
     void add(Movie movie);
+
+    void update(Movie movie);
 }

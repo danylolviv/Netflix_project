@@ -8,17 +8,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="283.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.UpdateWindowController">
    <children>
-      <TextField layoutX="67.0" layoutY="42.0" />
-      <TextField layoutX="67.0" layoutY="82.0" />
-      <TextField layoutX="67.0" layoutY="124.0" />
+      <TextField fx:id="titleField" layoutX="67.0" layoutY="48.0" />
+      <TextField fx:id="yearField" layoutX="65.0" layoutY="100.0" />
       <Text layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert new data" textAlignment="CENTER" wrappingWidth="283.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="67.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
-      <Text layoutX="68.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="title" />
-      <Text layoutX="67.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="year" />
-      <Button layoutX="65.0" layoutY="163.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Button" />
+      <Text layoutX="68.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="title" />
+      <Text layoutX="67.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="year" />
+      <Button layoutX="65.0" layoutY="135.0" mnemonicParsing="false" onAction="#updateMovie" prefHeight="25.0" prefWidth="149.0" text="Save" />
+      <Button layoutX="65.0" layoutY="167.0" mnemonicParsing="false" onAction="#closeTheWindow" prefHeight="25.0" prefWidth="149.0" text="Cancel" />
    </children>
 </AnchorPane>

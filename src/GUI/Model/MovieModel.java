@@ -27,6 +27,7 @@ public class MovieModel {
         }
     }
 
+
     public ObservableList<Movie> getObservableMovies(){
         return moviesToBeViewed;
     }
@@ -36,5 +37,9 @@ public class MovieModel {
     {
         moviesToBeViewed.add(movie);
         movieManager.add(movie);
+    }
+    public void updateMovie(Movie movie)
+    {
+        movieManager.updateMovie(movie);
     }
 }

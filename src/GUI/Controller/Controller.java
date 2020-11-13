@@ -1,6 +1,7 @@
 package GUI.Controller;
 
 
+import BE.Movie;
 import GUI.Model.MovieModel;
 import GUI.Model.UserModel;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+
 import javafx.stage.Stage;
 
 
@@ -35,6 +37,7 @@ public class Controller implements Initializable {
     private UserModel userModel;
 
     public Controller() {
+       // controller = new Controller();
        movieModel= new MovieModel();
        userModel = new UserModel();
     }
@@ -58,18 +61,34 @@ public class Controller implements Initializable {
         userList.setItems(userModel.getObservableUsers());
     }
 
+    public Movie sendSelectedMovie()
+    {
+    return (Movie) moviesList.getSelectionModel().getSelectedItem();
+
+    }
 
 
     public void UpdateMovie(ActionEvent event) throws IOException {
+       // moviesList.getSelectionModel().getSelectedItem()
+
+        // get the instance of the controller of the FXML loader
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/updateWindow.fxml"));
         Parent root = loader.load();
-        // get the instance of the controller of the FXML loader
+
+        //get controller from another class
         UpdateWindowController updateWindowController = loader.getController();
         updateWindowController.setModel(movieModel);
+        //now below we can call public methods from another class and modify it as we want
+        //ex. updateWindowController. or that one above
+
+        //this part is the same no matter
+        // if we use static or dymanic controller
         Stage stage = new Stage();
         stage.setTitle("update a movie");
         stage.setScene(new Scene(root));
         stage.show();
+
+
     }
 
     public void DeleteMovie(ActionEvent event) {

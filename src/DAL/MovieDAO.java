@@ -5,6 +5,7 @@ import BE.Movie;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class MovieDAO implements IMovieDataAccess {
     //CRUD operations
@@ -89,6 +90,40 @@ public class MovieDAO implements IMovieDataAccess {
         }
     }
 
+    @Override
+    public void update(Movie movie) {
+    String newFileString = "";
+        //the true keyword below is very important
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(MOVIE_SOURCE, true)))
+        {
+        Scanner scanner = new Scanner(String.valueOf(bw));
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine();
+                String[] fields = line.split(",");
+                int id = Integer.parseInt(fields[0].trim());
+                if (id != movie.getId()) {
+                    newFileString += line;
+                }
+                //we can change everything but not ID
+                if(id == movie.getId())
+                {
+                    String newMovie = movie.getId() + ',' + movie.getTitle() +',' +
+                            movie.getYear();
+                    bw.append(newMovie);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try (BufferedWriter bw
+                     = new BufferedWriter(
+                new FileWriter(MOVIE_SOURCE))) {
+            bw.write(newFileString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Movie makeObjectFromString(String line)
     {
         String[] splittedLine = line.split(",");
@@ -99,8 +134,6 @@ public class MovieDAO implements IMovieDataAccess {
         Movie movie = new Movie(id, title, year);
         return movie;
     }
-
-
 
 }
 

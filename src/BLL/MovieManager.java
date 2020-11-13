@@ -25,4 +25,8 @@ public class MovieManager {
     public void add(Movie movie) {
         movieDAO.add(movie);
     }
+
+    public void updateMovie(Movie movie) {
+        movieDAO.update(movie);
+    }
 }
