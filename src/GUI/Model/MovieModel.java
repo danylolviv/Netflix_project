@@ -16,12 +16,17 @@ public class MovieModel {
     public MovieModel(){
         movieManager = new MovieManager();
         moviesToBeViewed = FXCollections.observableArrayList();
+
+    }
+    public void loadMovies()
+    {
         try {
             moviesToBeViewed.addAll(movieManager.getAllMovies());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public ObservableList<Movie> getObservableMovies(){
         return moviesToBeViewed;
     }
@@ -30,5 +35,6 @@ public class MovieModel {
     public void addMovie(Movie movie)
     {
         moviesToBeViewed.add(movie);
+        movieManager.add(movie);
     }
 }

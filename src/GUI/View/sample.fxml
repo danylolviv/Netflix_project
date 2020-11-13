@@ -15,7 +15,7 @@
       <Button fx:id="createButton" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" onAction="#CreateMovieWindow" prefHeight="25.0" prefWidth="78.0" text="create" />
       <Button fx:id="updateButton" layoutX="115.0" layoutY="383.0" mnemonicParsing="false" onAction="#UpdateMovie" prefHeight="25.0" prefWidth="69.0" text="Update" />
       <Button fx:id="delateButton" layoutX="205.0" layoutY="383.0" mnemonicParsing="false" onAction="#DeleteMovie" prefHeight="25.0" prefWidth="78.0" text="Delete" />
-      <Button fx:id="enterButton" layoutX="317.0" layoutY="383.0" mnemonicParsing="false" onAction="#Enter" prefHeight="25.0" prefWidth="143.0" text="Enter" />
+      <Button fx:id="enterButton" layoutX="317.0" layoutY="383.0" mnemonicParsing="false" onAction="#LoadAll" prefHeight="25.0" prefWidth="143.0" text="Load All" />
       <ListView fx:id="ratingList" layoutX="478.0" layoutY="218.0" prefHeight="148.0" prefWidth="288.0" />
       <StackPane layoutX="466.0" layoutY="353.0" prefHeight="150.0" prefWidth="200.0" />
    </children>

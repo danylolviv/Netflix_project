@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateWindowController">
    <children>
       <TextField fx:id="IDfield" layoutX="29.0" layoutY="57.0" />
@@ -17,7 +16,6 @@
       <Text layoutX="29.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" />
       <Text layoutX="29.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
       <Button fx:id="addButton" layoutX="26.0" layoutY="217.0" mnemonicParsing="false" onAction="#addMovieButton" prefHeight="25.0" prefWidth="149.0" text="Add --&gt;" />
-      <Button fx:id="saveButton" layoutX="26.0" layoutY="258.0" mnemonicParsing="false" onAction="#saveMoviesButton" prefHeight="25.0" prefWidth="149.0" text="Save" />
       <Button fx:id="loadAllButton" layoutX="26.0" layoutY="299.0" mnemonicParsing="false" onAction="#loadAllButton" prefHeight="25.0" prefWidth="149.0" text="Load all " />
       <TableView fx:id="movieTable" layoutX="212.0" layoutY="18.0" prefHeight="308.0" prefWidth="347.0">
         <columns>

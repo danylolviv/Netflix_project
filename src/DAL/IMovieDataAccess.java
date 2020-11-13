@@ -8,4 +8,6 @@ import java.util.List;
 public interface IMovieDataAccess {
     public List<Movie> getAllMovies() throws IOException;
     public List<Movie> searchForTheMovies(String text);
+
+    void add(Movie movie);
 }

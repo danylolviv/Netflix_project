@@ -23,9 +23,6 @@ public class CreateWindowController implements Initializable {
     private TextField IDfield, titleField, yearField;
 
     @FXML
-    private Button addButton, saveButton, loadAllButton;
-
-    @FXML
     private TableColumn<Movie, Integer> IDcolumn;
     @FXML
     private TableColumn<Movie, Integer> yearColumn;
@@ -36,29 +33,26 @@ public class CreateWindowController implements Initializable {
     @FXML
     private TableView<Movie> movieTable;
 
-    private MovieModel movieModel = new MovieModel();
+    private MovieModel movieModel ;
     /**
      * If three TextFilelds are != empty add a movie
      * @param event
      */
     public void addMovieButton(ActionEvent event) {
-        //calls a method from MovieModel
-        Movie movie = new Movie(Integer.parseInt(IDfield.getText()), yearField.getText(),
-                Integer.parseInt(yearField.getText()) );
-        movieModel.addMovie(movie);
 
+        Movie movie = new Movie(Integer.parseInt(IDfield.getText()),
+                titleField.getText(), Integer.parseInt(yearField.getText()));
+        movieModel.addMovie(movie);
 
         IDfield.clear();
         yearField.clear();
         titleField.clear();
     }
 
-    public void saveMoviesButton(ActionEvent event) {
-       // movieModel.getObservableMovies().addAll(movieTable.getItems());
-    }
+
 
     public void loadAllButton(ActionEvent event) {
-       movieTable.setItems(movieModel.getObservableMovies()); // testing needed
+       movieModel.loadMovies();
     }
 
     @Override
@@ -67,5 +61,10 @@ public class CreateWindowController implements Initializable {
         yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
         titleColumn.setCellValueFactory(cell-> new ReadOnlyObjectWrapper(cell.getValue().getTitle()));
 
+    }
+
+    public void setModel(MovieModel movieModel) {
+        this.movieModel = movieModel;
+        movieTable.setItems(movieModel.getObservableMovies()); // testing needed
     }
 }

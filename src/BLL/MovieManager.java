@@ -22,5 +22,7 @@ public class MovieManager {
     public List<Movie> searchForTheMovies(String text) { return movieDAO.searchForTheMovies(text);}
 
 
-
+    public void add(Movie movie) {
+        movieDAO.add(movie);
+    }
 }

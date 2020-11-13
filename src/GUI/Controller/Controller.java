@@ -43,15 +43,11 @@ public class Controller implements Initializable {
         String text = typeField.getText();
        if(text != null)
        {
-            //call a method from
-
           moviesList.getItems().setAll(movieModel.getFoundMovies(text));
        }
        else{
            moviesList.getItems().add("there is no input");
        }
-
-
     }
 
     @Override
@@ -70,11 +66,17 @@ public class Controller implements Initializable {
     public void DeleteMovie(ActionEvent event) {
     }
 
-    public void Enter(ActionEvent event) {
+    public void LoadAll(ActionEvent event) {
+        movieModel.loadMovies();
     }
     @FXML
     private void CreateMovieWindow(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/GUI/View/createWindow.fxml"));
+        //loader insteada of static instance of controller
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/createWindow.fxml"));
+        Parent root = loader.load();
+        // get the instance of the controller of the FXML loader
+        CreateWindowController createWindowController = loader.getController();
+        createWindowController.setModel(movieModel);
         Stage stage = new Stage();
         stage.setTitle("Add new movies");
         stage.setScene(new Scene(root));

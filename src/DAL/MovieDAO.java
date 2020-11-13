@@ -76,6 +76,19 @@ public class MovieDAO implements IMovieDataAccess {
         return foundMovies;
     }
 
+    @Override
+    public void add(Movie movie) {
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(MOVIE_SOURCE, true)))
+        {
+            String movieString = movie.getId() + "," + movie.getTitle() + "," + movie.getYear();
+            bw.append(movieString);
+            bw.newLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Movie makeObjectFromString(String line)
     {
         String[] splittedLine = line.split(",");
