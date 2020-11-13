@@ -77,7 +77,11 @@ public class Controller implements Initializable {
 
         //get controller from another class
         UpdateWindowController updateWindowController = loader.getController();
-        updateWindowController.setModel(movieModel);
+
+        //we show the controller in this class that there is another controller in movieModel
+        //there we want to send the data
+        //updateWindowController.setModel(movieModel);
+        updateWindowController.setController(this);
         //now below we can call public methods from another class and modify it as we want
         //ex. updateWindowController. or that one above
 

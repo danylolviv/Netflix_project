@@ -2,6 +2,7 @@ package GUI.Model;
 
 import BE.Movie;
 import BLL.MovieManager;
+import GUI.Controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public class MovieModel {
     private ObservableList moviesToBeViewed;
     private MovieManager movieManager;
+    private Controller controller;
 
 
     public MovieModel(){
@@ -41,5 +43,9 @@ public class MovieModel {
     public void updateMovie(Movie movie)
     {
         movieManager.updateMovie(movie);
+    }
+
+    public Movie sendSelectedMovie() {
+       return controller.sendSelectedMovie();
     }
 }

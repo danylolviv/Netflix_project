@@ -16,8 +16,14 @@ public class UpdateWindowController {
 
     public void setModel(MovieModel movieModel) {
         this.movieModel = movieModel;
-        controller = new Controller();
+
     }
+
+    /**
+     * It sets controller from the class controller
+     * its needed if we want to move data in both directions
+     * @param controller
+     */
 
     /**
      * when we press save
@@ -25,11 +31,13 @@ public class UpdateWindowController {
      */
     public void updateMovie(ActionEvent event) {
         // here we update movie which is sent from the controller
-        Movie movie = controller.sendSelectedMovie();
+       // Movie movie = movieModel.sendSelectedMovie();
         movie.setTitle(titleField.getText());
         movie.setYear(Integer.parseInt(yearField.getText()));
         //then we need to send it back
-        movieModel.updateMovie(movie);
+      //  movieModel.updateMovie(movie);
+        controller.sendSelectedMovie();
+
 
     }
     public Movie sendTheMovieBack(Movie movie)
@@ -42,5 +50,9 @@ public class UpdateWindowController {
      * @param event
      */
     public void closeTheWindow(ActionEvent event) {
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
     }
 }
