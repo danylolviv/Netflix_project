@@ -60,7 +60,16 @@ public class Controller implements Initializable {
 
 
 
-    public void UpdateMovie(ActionEvent event) {
+    public void UpdateMovie(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/updateWindow.fxml"));
+        Parent root = loader.load();
+        // get the instance of the controller of the FXML loader
+        UpdateWindowController updateWindowController = loader.getController();
+        updateWindowController.setModel(movieModel);
+        Stage stage = new Stage();
+        stage.setTitle("update a movie");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public void DeleteMovie(ActionEvent event) {
