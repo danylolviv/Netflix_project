@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="249.0" layoutY="62.0" prefHeight="318.0" prefWidth="328.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="ID" />
+          <TableColumn prefWidth="193.0" text="title" />
+            <TableColumn prefWidth="59.0" text="year" />
+        </columns>
+      </TableView>
+      <Text layoutX="249.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a movie which you want to update" wrappingWidth="256.087890625" />
+      <Text layoutX="14.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert new inforamtion" />
+      <TextField layoutX="21.0" layoutY="104.0" />
+      <TextField layoutX="21.0" layoutY="169.0" />
+      <TextField layoutX="21.0" layoutY="240.0" />
+      <Text layoutX="21.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+      <Text layoutX="22.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" />
+      <Text layoutX="22.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
+      <Button layoutX="19.0" layoutY="289.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Save" />
+   </children>
+</AnchorPane>
