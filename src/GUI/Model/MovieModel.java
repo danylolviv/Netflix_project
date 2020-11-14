@@ -48,5 +48,11 @@ public class MovieModel {
     }
 
 
-
+    public void searchAllMovies(String text) {
+        try{
+            moviesToBeViewed.addAll(movieManager.searchForTheMovies(text));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

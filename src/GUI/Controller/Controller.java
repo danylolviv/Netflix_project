@@ -6,17 +6,16 @@ import BE.Rating;
 import BE.User;
 import GUI.Model.MovieModel;
 import GUI.Model.UserModel;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
@@ -25,16 +24,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    //TableView movie
     @FXML
-    private ListView<Movie> moviesList;
+   private TableView<Movie> tableMovie;
     @FXML
-    private ListView<Rating> ratingList;
+    private TableColumn<Movie, Integer> columnId;
     @FXML
-    private ListView<User> userList;
+    private TableColumn<Movie, Integer> columnYear;
+    @FXML
+    private TableColumn<Movie, String> columnTitle;
 
-    @FXML
-    private Button searchButton, createButton, updateButton, deleteButton, enterButton;
-
+    //searching field
    @FXML
    private TextField typeField;
 
@@ -51,41 +51,31 @@ public class Controller implements Initializable {
         String text = typeField.getText();
        if(text != null)
        {
-          moviesList.getItems().setAll(movieModel.getFoundMovies(text));
+          movieModel.searchAllMovies(text);
        }
-
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //here we use movieModel
-        moviesList.setItems(movieModel.getObservableMovies());
-
-        userList.setItems(userModel.getObservableUsers());
+        columnId.setCellValueFactory( new PropertyValueFactory<Movie, Integer>("id"));
+        columnYear.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("year"));
+        columnTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("title"));
     }
 
-    /*public Movie sendSelectedMovie()
-    {
-    return (Movie)
-moviesList.getSelectionModel().getSelectedItem();
+    public void setModel(MovieModel movieModel) {
+        this.movieModel = movieModel;
+        tableMovie.setItems(movieModel.getObservableMovies());
     }
-
-     */
-
 
     public void UpdateMovie(ActionEvent event) throws IOException {
-       // moviesList.getSelectionModel().getSelectedItem()
-
         // get the instance of the controller of the FXML loader
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/updateWindow.fxml"));
         Parent root = loader.load();
 
         //get controller from another class
-        UpdateWindowController updateWindowController = loader.getController();
-        //updateWindowController.changeTheMovie(
-       //        moviesList.selectionModelProperty().getValue().getSelectedItem());
-        Movie movie = moviesList.getSelectionModel().getSelectedItem();
-       updateWindowController.sendMovie(movie);
+       // UpdateWindowController updateWindowController = loader.getController();
+        //updateWindowController.setModel(movieModel);
+        //updateWindowController.sendMovie(tableMovie.getSelectionModel().getSelectedItem());
         Stage stage = new Stage();
         stage.setTitle("update a movie");
         stage.setScene(new Scene(root));
@@ -101,6 +91,7 @@ moviesList.getSelectionModel().getSelectedItem();
 
     public void LoadAll(ActionEvent event) {
         movieModel.loadMovies();
+        tableMovie.setItems(movieModel.getObservableMovies());
     }
     @FXML
     private void CreateMovieWindow(ActionEvent event) throws IOException {

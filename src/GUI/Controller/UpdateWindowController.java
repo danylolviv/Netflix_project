@@ -61,4 +61,8 @@ public UpdateWindowController(MovieModel movieModel)
         this.movie = movie;
 
     }
+
+    public void setModel(MovieModel movieModel) {
+        this.movieModel = movieModel;
+    }
 }
