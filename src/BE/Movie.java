@@ -1,7 +1,8 @@
 package BE;
 
 public class Movie {
-    private final int id;
+
+    private  int id;
     private String title;
     private int year;
 
@@ -14,6 +15,10 @@ public class Movie {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

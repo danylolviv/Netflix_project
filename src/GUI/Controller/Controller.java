@@ -59,7 +59,9 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         columnId.setCellValueFactory( new PropertyValueFactory<Movie, Integer>("id"));
         columnYear.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("year"));
-        columnTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("title"));
+        //columnTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("title"));
+       columnTitle.setCellValueFactory(cell-> new ReadOnlyObjectWrapper(cell.getValue().getTitle()));
+
     }
 
     public void setModel(MovieModel movieModel) {
@@ -68,22 +70,19 @@ public class Controller implements Initializable {
     }
 
     public void UpdateMovie(ActionEvent event) throws IOException {
-        // get the instance of the controller of the FXML loader
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/updateWindow.fxml"));
         Parent root = loader.load();
-
-        //get controller from another class
-       // UpdateWindowController updateWindowController = loader.getController();
-        //updateWindowController.setModel(movieModel);
-        //updateWindowController.sendMovie(tableMovie.getSelectionModel().getSelectedItem());
         Stage stage = new Stage();
-        stage.setTitle("update a movie");
+        stage.setTitle("Update");
         stage.setScene(new Scene(root));
         stage.show();
 
-        //updateWindowController.changeTheMovie((Movie)moviesList.getSelectionModel().getSelectedItem());
-        // meybe add listener instead of that
+    }
 
+    public int sendIDofTheSelectedMovie()
+    {
+        return tableMovie.getSelectionModel().getSelectedItem().getId();
     }
 
     public void DeleteMovie(ActionEvent event) {
@@ -94,10 +93,17 @@ public class Controller implements Initializable {
         tableMovie.setItems(movieModel.getObservableMovies());
     }
     @FXML
-    private void CreateMovieWindow(ActionEvent event) throws IOException {
+    private void CreateMovieWindow(ActionEvent event)  {
         //loader insteada of static instance of controller
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/createWindow.fxml"));
-        Parent root = loader.load();
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         // get the instance of the controller of the FXML loader
         CreateWindowController createWindowController = loader.getController();
         createWindowController.setModel(movieModel);

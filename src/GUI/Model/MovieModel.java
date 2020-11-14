@@ -42,7 +42,7 @@ public class MovieModel {
         moviesToBeViewed.add(movie);
         movieManager.add(movie);
     }
-    public void updateMovie(Movie movie)
+    public void update(Movie movie)
     {
         movieManager.updateMovie(movie);
     }
@@ -55,4 +55,6 @@ public class MovieModel {
             e.printStackTrace();
         }
     }
+
+
 }
