@@ -81,7 +81,7 @@ public class MovieDAO implements IMovieDataAccess {
     public void add(Movie movie) {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(MOVIE_SOURCE, true)))
         {
-            String movieString = movie.getId() + "," + movie.getTitle() + "," + movie.getYear();
+            String movieString = movie.getId() +  "," + movie.getYear() +"," + movie.getTitle() ;
             bw.append(movieString);
             bw.newLine();
 
@@ -92,6 +92,7 @@ public class MovieDAO implements IMovieDataAccess {
 
     @Override
     public void update(Movie movie) {
+
     String newFileString = "";
         //the true keyword below is very important
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(MOVIE_SOURCE, true)))
@@ -107,14 +108,14 @@ public class MovieDAO implements IMovieDataAccess {
                 //we can change everything but not ID
                 if(id == movie.getId())
                 {
-                    String newMovie = movie.getId() + ',' + movie.getTitle() +',' +
-                            movie.getYear();
+                   String newMovie = movie.getId() + ','  + movie.getYear() + ',' + movie.getTitle() ;
                     bw.append(newMovie);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         try (BufferedWriter bw
                      = new BufferedWriter(
                 new FileWriter(MOVIE_SOURCE))) {
@@ -122,6 +123,22 @@ public class MovieDAO implements IMovieDataAccess {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+/*
+
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter(MOVIE_SOURCE, true);
+            fw.append(movie.toString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+ */
+
+
     }
 
     private Movie makeObjectFromString(String line)

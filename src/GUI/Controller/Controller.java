@@ -2,6 +2,8 @@ package GUI.Controller;
 
 
 import BE.Movie;
+import BE.Rating;
+import BE.User;
 import GUI.Model.MovieModel;
 import GUI.Model.UserModel;
 import javafx.event.ActionEvent;
@@ -24,7 +26,11 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     @FXML
-    private ListView moviesList,ratingList, userList;
+    private ListView<Movie> moviesList;
+    @FXML
+    private ListView<Rating> ratingList;
+    @FXML
+    private ListView<User> userList;
 
     @FXML
     private Button searchButton, createButton, updateButton, deleteButton, enterButton;
@@ -37,7 +43,6 @@ public class Controller implements Initializable {
     private UserModel userModel;
 
     public Controller() {
-       // controller = new Controller();
        movieModel= new MovieModel();
        userModel = new UserModel();
     }
@@ -48,9 +53,7 @@ public class Controller implements Initializable {
        {
           moviesList.getItems().setAll(movieModel.getFoundMovies(text));
        }
-       else{
-           moviesList.getItems().add("there is no input");
-       }
+
     }
 
     @Override
@@ -61,11 +64,13 @@ public class Controller implements Initializable {
         userList.setItems(userModel.getObservableUsers());
     }
 
-    public Movie sendSelectedMovie()
+    /*public Movie sendSelectedMovie()
     {
-    return (Movie) moviesList.getSelectionModel().getSelectedItem();
-
+    return (Movie)
+moviesList.getSelectionModel().getSelectedItem();
     }
+
+     */
 
 
     public void UpdateMovie(ActionEvent event) throws IOException {
@@ -77,21 +82,17 @@ public class Controller implements Initializable {
 
         //get controller from another class
         UpdateWindowController updateWindowController = loader.getController();
-
-        //we show the controller in this class that there is another controller in movieModel
-        //there we want to send the data
-        //updateWindowController.setModel(movieModel);
-        updateWindowController.setController(this);
-        //now below we can call public methods from another class and modify it as we want
-        //ex. updateWindowController. or that one above
-
-        //this part is the same no matter
-        // if we use static or dymanic controller
+        //updateWindowController.changeTheMovie(
+       //        moviesList.selectionModelProperty().getValue().getSelectedItem());
+        Movie movie = moviesList.getSelectionModel().getSelectedItem();
+       updateWindowController.sendMovie(movie);
         Stage stage = new Stage();
         stage.setTitle("update a movie");
         stage.setScene(new Scene(root));
         stage.show();
 
+        //updateWindowController.changeTheMovie((Movie)moviesList.getSelectionModel().getSelectedItem());
+        // meybe add listener instead of that
 
     }
 

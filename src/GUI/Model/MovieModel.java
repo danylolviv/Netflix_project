@@ -3,8 +3,10 @@ package GUI.Model;
 import BE.Movie;
 import BLL.MovieManager;
 import GUI.Controller.Controller;
+import GUI.Controller.UpdateWindowController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 import java.util.List;
@@ -45,7 +47,6 @@ public class MovieModel {
         movieManager.updateMovie(movie);
     }
 
-    public Movie sendSelectedMovie() {
-       return controller.sendSelectedMovie();
-    }
+
+
 }
