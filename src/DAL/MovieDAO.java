@@ -128,6 +128,29 @@ public class MovieDAO implements IMovieDataAccess {
 
     }
 
+    @Override
+    public void delete(Movie movie) throws MrsDalException {
+        try {
+            File file = new File(MOVIE_SOURCE);
+            if (!file.canWrite()) {
+                throw new MrsDalException("Can't write to movie storage");
+            }
+            List<Movie> movies = getAllMovies();
+            movies.remove(movie);
+            OutputStream os = Files.newOutputStream(file.toPath());
+            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os))) {
+                for (Movie mov : movies) {
+                    String line = mov.getId() + "," + mov.getYear() + "," + mov.getTitle();
+                    bw.write(line);
+                    bw.newLine();
+                }
+            }
+        } catch (IOException | MrsDalException ex) {
+            throw new MrsDalException("Could not delete movie.", ex);
+        }
+
+    }
+
 
     private Movie createMovie(int releaseYear, String title, Movie movie) throws MrsDalException {
         Path path = new File(MOVIE_SOURCE).toPath();

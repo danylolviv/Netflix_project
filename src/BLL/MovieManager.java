@@ -34,4 +34,8 @@ public class MovieManager {
             e.printStackTrace();
         }
     }
+
+    public void delete(Movie movie) throws MrsDalException {
+        movieDAO.delete(movie);
+    }
 }

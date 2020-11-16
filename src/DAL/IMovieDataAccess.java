@@ -13,4 +13,6 @@ public interface IMovieDataAccess {
     void add(Movie movie);
 
     void update(Movie movie) throws MrsDalException;
+
+    void delete(Movie movie) throws MrsDalException;
 }

@@ -85,8 +85,17 @@ public class Controller implements Initializable {
         return tableMovie.getSelectionModel().getSelectedItem().getId();
     }
 
-    public void DeleteMovie(ActionEvent event) {
+    public void DeleteMovie(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/deleteMovie.fxml"));
+        Parent root = loader.load();
 
+        DeleteMovieController deleteMovieController = loader.getController();
+        deleteMovieController.setModel(movieModel, tableMovie.getSelectionModel().getSelectedItem());
+
+        Stage stage = new Stage();
+        stage.setTitle("Update");
+        stage.setScene(new Scene(root));
+        stage.show();
 
     }
 

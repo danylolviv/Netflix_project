@@ -2,6 +2,7 @@ package GUI.Model;
 
 import BE.Movie;
 import BLL.MovieManager;
+import DAL.exception.MrsDalException;
 import GUI.Controller.Controller;
 import GUI.Controller.UpdateWindowController;
 import javafx.collections.FXCollections;
@@ -58,4 +59,7 @@ public class MovieModel {
     }
 
 
+    public void deleteMovie(Movie movie) throws MrsDalException {
+        movieManager.delete(movie);
+    }
 }
