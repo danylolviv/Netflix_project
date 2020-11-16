@@ -1,6 +1,7 @@
 package DAL;
 
 import BE.Movie;
+import DAL.exception.MrsDalException;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,5 +12,5 @@ public interface IMovieDataAccess {
 
     void add(Movie movie);
 
-    void update(Movie movie);
+    void update(Movie movie) throws MrsDalException;
 }

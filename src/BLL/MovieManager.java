@@ -5,6 +5,7 @@ import BE.User;
 import DAL.IMovieDataAccess;
 import DAL.MovieDAO;
 import DAL.UserDAO;
+import DAL.exception.MrsDalException;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,6 +28,10 @@ public class MovieManager {
     }
 
     public void updateMovie(Movie movie) {
-        movieDAO.update(movie);
+        try {
+            movieDAO.update(movie);
+        } catch (MrsDalException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -50,6 +50,7 @@ public class MovieModel {
 
     public void searchAllMovies(String text) {
         try{
+            moviesToBeViewed.removeAll(getObservableMovies());
             moviesToBeViewed.addAll(movieManager.searchForTheMovies(text));
         } catch (Exception e) {
             e.printStackTrace();

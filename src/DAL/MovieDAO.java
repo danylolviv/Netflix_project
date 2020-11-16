@@ -1,9 +1,15 @@
 package DAL;
 
 import BE.Movie;
+import DAL.exception.MrsDalException;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -91,54 +97,71 @@ public class MovieDAO implements IMovieDataAccess {
     }
 
     @Override
-    public void update(Movie movie) {
+    public void update(Movie movie) throws MrsDalException {
+        createMovie(movie.getYear(), movie.getTitle(), movie);
+        try {
+            File tmp = new File(movie.hashCode() + ".txt"); //Creates a temp file for writing to.
+            List<Movie> allMovies = getAllMovies();
+            allMovies.removeIf((Movie t) -> t.getId() == movie.getId());
+            allMovies.add(movie);
 
-    String newFileString = "";
-        //the true keyword below is very important
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(MOVIE_SOURCE, true)))
-        {
-        Scanner scanner = new Scanner(String.valueOf(bw));
-            while (scanner.hasNext()) {
-                String line = scanner.nextLine();
-                String[] fields = line.split(",");
-                int id = Integer.parseInt(fields[0].trim());
-                if (id != movie.getId()) {
-                    newFileString += line;
-                }
-                //we can change everything but not ID
-                if(id == movie.getId())
-                {
-                   String newMovie = movie.getId() + ','  + movie.getYear() + ',' + movie.getTitle() ;
-                    bw.append(newMovie);
+            //I'll sort the movies by their ID's
+            allMovies.sort(Comparator.comparingInt(Movie::getId));
+
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(tmp))) {
+                for (Movie mov : allMovies) {
+                    bw.write(mov.getId() + "," + mov.getYear() + "," + mov.getTitle());
+                    bw.newLine();
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            //Overwrite the movie file wit the tmp one.
+            Files.copy(tmp.toPath(), new File(MOVIE_SOURCE).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            //Clean up after the operation is done (Remve tmp)
+            Files.delete(tmp.toPath());
+
+        } catch (IOException ex) {
+            throw new MrsDalException("Could not update movie.", ex);
         }
 
-        try (BufferedWriter bw
-                     = new BufferedWriter(
-                new FileWriter(MOVIE_SOURCE))) {
-            bw.write(newFileString);
-        } catch (IOException e) {
-            e.printStackTrace();
+    }
+
+
+    private Movie createMovie(int releaseYear, String title, Movie movie) throws MrsDalException {
+        Path path = new File(MOVIE_SOURCE).toPath();
+        int id = -1;
+        try (BufferedWriter bw = Files.newBufferedWriter(path, StandardOpenOption.SYNC, StandardOpenOption.APPEND, StandardOpenOption.WRITE)) {
+           // id = getNextAvailableMovieID();
+            id= movie.getId();
+            bw.newLine();
+            bw.write(id + "," + releaseYear + "," + title);
+        } catch (IOException ex) {
+            throw new MrsDalException("Could not create Movie.", ex);
         }
+        return new Movie(id, title, releaseYear);
+    }
 
-
-/*
-
-        FileWriter fw = null;
-        try {
-            fw = new FileWriter(MOVIE_SOURCE, true);
-            fw.append(movie.toString());
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    /**
+     * Examines all stored movies and returns the next available highest ID.
+     *
+     * @return
+     * @throws IOException
+     */
+    private int getNextAvailableMovieID() throws MrsDalException {
+        List<Movie> allMovies = getAllMovies();
+        if (allMovies == null || allMovies.isEmpty()) {
+            return 1;
         }
-
- */
-
-
+        allMovies.sort((Movie arg0, Movie arg1) -> arg0.getId() - arg1.getId());
+        int id = allMovies.get(0).getId();
+        for (int i = 0; i < allMovies.size(); i++) {
+            if (allMovies.get(i).getId() <= id) {
+                id++;
+            } else {
+                return id;
+            }
+        }
+        return id;
     }
 
     private Movie makeObjectFromString(String line)

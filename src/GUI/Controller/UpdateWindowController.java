@@ -17,6 +17,7 @@ public class UpdateWindowController implements Initializable {
     private int ID=-1;
     private Controller controller;
     private MovieModel movieModel;
+    private Movie movie;
 
     @FXML
     private TextField titleField, yearField;
@@ -38,13 +39,19 @@ public class UpdateWindowController implements Initializable {
 
     public void updateMovie(ActionEvent event) {
         //controller.sendIDofTheSelectedMovie()
-        Movie movie = new Movie(controller.sendIDofTheSelectedMovie(), titleField.getText(),
+        Movie movie1 = new Movie(movie.getId(), titleField.getText(),
                 Integer.parseInt(yearField.getText()));
-        movieModel.update(movie);
+
+        movieModel.update(movie1);
     }
 
 
 
     public void closeTheWindow(ActionEvent event) {
+    }
+
+    public void setModel(MovieModel movieModel, Movie movie) {
+        this.movieModel=movieModel;
+        this.movie=movie;
     }
 }

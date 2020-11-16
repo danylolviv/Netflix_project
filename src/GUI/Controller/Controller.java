@@ -49,10 +49,7 @@ public class Controller implements Initializable {
 
     public void searchAllMovies(ActionEvent event) {
         String text = typeField.getText();
-       if(text != null)
-       {
-          movieModel.searchAllMovies(text);
-       }
+        movieModel.searchAllMovies(text);
     }
 
     @Override
@@ -73,6 +70,9 @@ public class Controller implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/updateWindow.fxml"));
         Parent root = loader.load();
+
+        UpdateWindowController updateWindowController = loader.getController();
+        updateWindowController.setModel(movieModel, tableMovie.getSelectionModel().getSelectedItem());
         Stage stage = new Stage();
         stage.setTitle("Update");
         stage.setScene(new Scene(root));
@@ -86,6 +86,8 @@ public class Controller implements Initializable {
     }
 
     public void DeleteMovie(ActionEvent event) {
+
+
     }
 
     public void LoadAll(ActionEvent event) {
