@@ -34,10 +34,12 @@ public class MovieDAO implements IMovieDataAccess {
                 String line = br.readLine();
                 if(line==null)
                     hasLines=false;
-                if(hasLines)
+                if(hasLines && !line.isBlank())
                 {
+
+
                   try{  allMovies.add(makeObjectFromString(line));} catch (NumberFormatException e) {
-                      //e.printStackTrace();
+                      e.printStackTrace();
                       System.out.println("Number format exception: "+ line);
                   }
                 }

@@ -17762,4 +17762,4 @@
 17768,2000,Epoch
 17769,2003,The Company
 17770,2003,Alien Hunter
-17771,1999,jakub piotr czechowski
+17771,1,kk
