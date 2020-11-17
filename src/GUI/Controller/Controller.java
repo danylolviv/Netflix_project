@@ -29,6 +29,8 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+    private User selectedUser;
     //TableView movie
     @FXML
    private TableView<Movie> tableMovie;
@@ -86,8 +88,10 @@ public class Controller implements Initializable {
        setItemsComboBox();
     }
 
+
     private void setItemsComboBox()
     {
+
        Integer[] ratingOptions = {-5, -4, -3, -2, -1, 1, 2, 3, 4, 5};
         ObservableList<Integer> observableList = FXCollections.observableArrayList();
         observableList.addAll(Arrays.asList(ratingOptions));
@@ -161,10 +165,12 @@ public class Controller implements Initializable {
     }
 
     public void selectUser(ActionEvent event) {
+        selectedUser = usersTable.getSelectionModel().getSelectedItem();
         currentUserField.setText("Current User: " + usersTable.getSelectionModel().getSelectedItem().getName());
     }
 
     public void rate(ActionEvent event) {
-        ratingModel.rate(ratingComboBox.getSelectionModel().getSelectedItem());
+        ratingModel.rate(ratingComboBox.getSelectionModel().getSelectedItem(),
+                tableMovie.getSelectionModel().getSelectedItem(), selectedUser);
     }
 }
