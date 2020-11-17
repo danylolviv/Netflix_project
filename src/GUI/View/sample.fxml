@@ -24,7 +24,7 @@
         </columns>
       </TableView>
       <Button layoutX="16.0" layoutY="428.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="168.0" text="Receive recommendations" />
-      <Button layoutX="364.0" layoutY="428.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Rate" />
+      <Button layoutX="364.0" layoutY="428.0" mnemonicParsing="false" onAction="#rate" prefHeight="25.0" prefWidth="78.0" text="Rate" />
       <TableView layoutX="477.0" layoutY="275.0" prefHeight="221.0" prefWidth="294.0">
         <columns>
           <TableColumn prefWidth="280.0" text="Recommended movies" />
@@ -35,8 +35,8 @@
           <TableColumn fx:id="usersColumn" prefWidth="293.0" text="Users" />
         </columns>
       </TableView>
-      <ComboBox layoutX="197.0" layoutY="428.0" prefWidth="150.0" />
-      <Text fx:id="currentUserField" layoutX="20.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current User: " wrappingWidth="107.13671875" />
+      <ComboBox fx:id="ratingComboBox" layoutX="197.0" layoutY="428.0" prefWidth="150.0" />
+      <Text fx:id="currentUserField" layoutX="20.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current User: " wrappingWidth="212.13671875" />
       <Button layoutX="247.0" layoutY="468.0" mnemonicParsing="false" onAction="#selectUser" prefHeight="25.0" prefWidth="140.0" text="Select a user" />
    </children>
 </AnchorPane>

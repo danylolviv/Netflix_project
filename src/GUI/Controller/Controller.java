@@ -5,8 +5,11 @@ import BE.Movie;
 import BE.Rating;
 import BE.User;
 import GUI.Model.MovieModel;
+import GUI.Model.RatingModel;
 import GUI.Model.UserModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,11 +19,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -45,15 +50,23 @@ public class Controller implements Initializable {
    private TextField typeField;
 
    //information about a current user
+    @FXML
+    private Text currentUserField;
+
+    //combobox for rating
+    @FXML
+    private  ComboBox ratingComboBox;
 
 
     private MovieModel movieModel;
     private UserModel userModel;
+    private RatingModel ratingModel;
 
 
     public Controller() {
        movieModel= new MovieModel();
        userModel = new UserModel();
+       ratingModel = new RatingModel();
     }
 
     public void searchAllMovies(ActionEvent event) {
@@ -70,6 +83,17 @@ public class Controller implements Initializable {
 
        usersColumn.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
        usersTable.setItems(userModel.getObservableUsers());
+       setItemsComboBox();
+    }
+
+    private void setItemsComboBox()
+    {
+       Integer[] ratingOptions = {-5, -4, -3, -2, -1, 1, 2, 3, 4, 5};
+        ObservableList<Integer> observableList = FXCollections.observableArrayList();
+        observableList.addAll(Arrays.asList(ratingOptions));
+
+        ratingComboBox.setItems(observableList);
+
 
     }
 
@@ -137,6 +161,10 @@ public class Controller implements Initializable {
     }
 
     public void selectUser(ActionEvent event) {
+        currentUserField.setText("Current User: " + usersTable.getSelectionModel().getSelectedItem().getName());
+    }
 
+    public void rate(ActionEvent event) {
+        ratingModel.rate(ratingComboBox.getSelectionModel().getSelectedItem());
     }
 }
