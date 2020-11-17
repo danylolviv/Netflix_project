@@ -34,13 +34,22 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<Movie, String> columnTitle;
 
+    //TableView for users
+    @FXML
+    private TableView<User> usersTable;
+    @FXML
+    private  TableColumn<User, String>  usersColumn;
+
     //searching field
    @FXML
    private TextField typeField;
 
+   //information about a current user
+
 
     private MovieModel movieModel;
     private UserModel userModel;
+
 
     public Controller() {
        movieModel= new MovieModel();
@@ -58,6 +67,9 @@ public class Controller implements Initializable {
         columnYear.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("year"));
         //columnTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("title"));
        columnTitle.setCellValueFactory(cell-> new ReadOnlyObjectWrapper(cell.getValue().getTitle()));
+
+       usersColumn.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
+       usersTable.setItems(userModel.getObservableUsers());
 
     }
 
@@ -122,5 +134,9 @@ public class Controller implements Initializable {
         stage.setTitle("Add new movies");
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public void selectUser(ActionEvent event) {
+
     }
 }
