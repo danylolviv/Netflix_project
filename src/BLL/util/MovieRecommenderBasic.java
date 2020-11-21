@@ -31,7 +31,8 @@ public class MovieRecommenderBasic {
 
         for(Rating rating: allRatings)
         {
-            if(movieDAO.getMovieByID(ratedMovieID).getId()==rating.getRatedMovieID())
+           // if(movieDAO.getMovieByID(ratedMovieID).getId()==rating.getRatedMovieID())
+            if(ratedMovieID==rating.getRatedMovieID())
             {
                 sumRating+= rating.getRating();
                 iterations++;
@@ -49,7 +50,7 @@ public class MovieRecommenderBasic {
     private HashMap<Rating, Double> getSortedRatings()
     {
         List<Rating> allRatingsList = ratingDAO.getAllRatings();
-        HashMap<Rating, Double> allRatingsHashMap = new HashMap<Rating, Double>();
+        HashMap<Rating, Double> allRatingsHashMap = new HashMap<>(); // i removed from the curly brackets
         // do i need to specify in the second curly brackets?
         //items in the hashmap aren't in the order??
 
@@ -77,7 +78,8 @@ public class MovieRecommenderBasic {
         // for each rating find corresponding movie and add it to the list
         // for each not appliable to HashMap. need to create a list
         List<Map.Entry<Rating, Double>> list =
-                new LinkedList<Map.Entry<Rating, Double> >(sortedRecommendations.entrySet());
+
+               new LinkedList< >(sortedRecommendations.entrySet());//Map.Entry<Rating, Double>
 
         for (Map.Entry<Rating, Double> element: list
              ) {
@@ -95,19 +97,19 @@ public class MovieRecommenderBasic {
     {
         //create a list of elements from elements of HashMap
         List<Map.Entry<Rating, Double>> list =
-                new LinkedList<Map.Entry<Rating, Double> >(hashMap.entrySet());
+                new LinkedList< >(hashMap.entrySet());
 
         //sort the list
         Collections.sort(list, new Comparator<Map.Entry<Rating, Double>>() {
             @Override
-            public int compare(Map.Entry<Rating, Double> o1, Map.Entry<Rating, Double> o2) {
+            public int compare(Map.Entry<Rating, Double> o1, Map.Entry<Rating, Double> o2) { // here there may be problem with reference type
                 //sort in the descending order
                 return (o2.getValue().compareTo(o1.getValue()));
             }
         });
 
         //put data from sorted list to a hashmap
-        HashMap<Rating, Double> temp = new LinkedHashMap<Rating, Double>();
+        HashMap<Rating, Double> temp = new LinkedHashMap<>();
         for (Map.Entry<Rating, Double> element: list
              ) {
             temp.put(element.getKey(), element.getValue());

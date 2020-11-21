@@ -183,8 +183,9 @@ public class Controller implements Initializable {
         selectedUser = usersTable.getSelectionModel().getSelectedItem();
         currentUserField.setText("Current User: " +
                 usersTable.getSelectionModel().getSelectedItem().getName());
-        recommendedMoviesTable.setItems((ObservableList<Movie>)
-                movieRecommendationBasic.getRecommendedMovies());
+        //functionality doesn't work in the very weird way
+      // recommendedMoviesTable.setItems((ObservableList<Movie>) movieRecommendationBasic.getRecommendedMovies());
+        recommendedMoviesTable.setItems(movieModel.getRecommendedMovies());
     }
 
     public void rate(ActionEvent event) {
