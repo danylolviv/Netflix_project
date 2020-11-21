@@ -23,7 +23,7 @@ public class MovieRecommenderBasic {
 
     private double averageRating(int ratedMovieID)
     {
-        Movie movie = movieDAO.findMovieByID(ratedMovieID);
+      //  Movie movie = movieDAO.getMovieByID(ratedMovieID);
 
         List<Rating> allRatings = ratingDAO.getAllRatings();
         double sumRating=0.0;
@@ -31,9 +31,9 @@ public class MovieRecommenderBasic {
 
         for(Rating rating: allRatings)
         {
-            if(rating.getRatedMovieID()==movie.getId())
+            if(movieDAO.getMovieByID(ratedMovieID).getId()==rating.getRatedMovieID())
             {
-                sumRating+=rating.getRating();
+                sumRating+= rating.getRating();
                 iterations++;
             }
         }
@@ -81,7 +81,7 @@ public class MovieRecommenderBasic {
 
         for (Map.Entry<Rating, Double> element: list
              ) {
-            moviesToRecommend.add(movieDAO.findMovieByID(element.getKey().getRatedMovieID()));
+            moviesToRecommend.add(movieDAO.getMovieByID(element.getKey().getRatedMovieID()));
         }
         return moviesToRecommend;
     }

@@ -152,16 +152,21 @@ public class MovieDAO implements IMovieDataAccess {
     }
 
     @Override
-    public Movie findMovieByID(int movieID) {
+    public Movie getMovieByID(int movieID)  {
         List<Movie> allMovies = getAllMovies();
+        try {
+            for (Movie movie : allMovies
+            ) {
+                if (movieID == movie.getId())
+                    return movie;
 
-        for (Movie movie: allMovies
-             ) {
-            if(movieID==movie.getId())
-                return movie;
-
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("some issue here");
         }
         return null;
+
     }
 
 

@@ -16,5 +16,5 @@ public interface IMovieDataAccess {
 
     void delete(Movie movie) throws MrsDalException;
 
-    Movie findMovieByID(int ratedMovieID);
+    Movie getMovieByID(int movieID);
 }
