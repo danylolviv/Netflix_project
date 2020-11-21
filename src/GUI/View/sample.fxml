@@ -25,7 +25,7 @@
       </TableView>
       <Button layoutX="16.0" layoutY="428.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="168.0" text="Receive recommendations" />
       <Button layoutX="364.0" layoutY="428.0" mnemonicParsing="false" onAction="#rate" prefHeight="25.0" prefWidth="78.0" text="Rate" />
-      <TableView layoutX="477.0" layoutY="275.0" prefHeight="221.0" prefWidth="294.0">
+      <TableView fx:id="recommendedMoviesTable" layoutX="477.0" layoutY="275.0" prefHeight="221.0" prefWidth="294.0">
         <columns>
           <TableColumn prefWidth="280.0" text="Recommended movies" />
         </columns>

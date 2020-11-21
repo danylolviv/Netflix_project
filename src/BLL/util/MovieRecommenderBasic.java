@@ -17,10 +17,11 @@ public class MovieRecommenderBasic {
         public MovieRecommenderBasic() {
             movieDAO = new MovieDAO();
             userDAO = new UserDAO();
+            ratingDAO= new RatingDAO();
         }
 
 
-    public double averageRating(int ratedMovieID)
+    private double averageRating(int ratedMovieID)
     {
         Movie movie = movieDAO.findMovieByID(ratedMovieID);
 
@@ -40,14 +41,12 @@ public class MovieRecommenderBasic {
     }
 
     /**
-     * Calculate the average rating for all the books
-     * in the library
-     *
-     *add them to the ArraylIst
-     *
+     * Calculate the ratings
+     * add them to the HashMap
      * sort
+     * return hashmap with ratings in the descending order
      */
-    public void addRatings()
+    private HashMap<Rating, Double> getSortedRatings()
     {
         List<Rating> allRatingsList = ratingDAO.getAllRatings();
         HashMap<Rating, Double> allRatingsHashMap = new HashMap<Rating, Double>();
@@ -62,11 +61,36 @@ public class MovieRecommenderBasic {
         //we sort a hashmap
         allRatingsHashMap = sortHashMapByValue(allRatingsHashMap);
 
-        //now we need to send data back to a user. here return to the program
-        //modify the method so that we can use it elsewhere
-
+        //send the sorted hashmap
+        return allRatingsHashMap;
     }
 
+    /**
+     * this method will be used in the GUI layer
+     * @return
+     */
+    public List<Movie> getRecommendedMovies()
+    {
+        List<Movie> moviesToRecommend = new ArrayList<>();
+        HashMap<Rating, Double> sortedRecommendations = getSortedRatings();
+
+        // for each rating find corresponding movie and add it to the list
+        // for each not appliable to HashMap. need to create a list
+        List<Map.Entry<Rating, Double>> list =
+                new LinkedList<Map.Entry<Rating, Double> >(sortedRecommendations.entrySet());
+
+        for (Map.Entry<Rating, Double> element: list
+             ) {
+            moviesToRecommend.add(movieDAO.findMovieByID(element.getKey().getRatedMovieID()));
+        }
+        return moviesToRecommend;
+    }
+
+    /**
+     * sort the hashMap by value
+     * @param hashMap
+     * @return
+     */
     private HashMap<Rating, Double> sortHashMapByValue(HashMap<Rating, Double> hashMap)
     {
         //create a list of elements from elements of HashMap
@@ -77,7 +101,8 @@ public class MovieRecommenderBasic {
         Collections.sort(list, new Comparator<Map.Entry<Rating, Double>>() {
             @Override
             public int compare(Map.Entry<Rating, Double> o1, Map.Entry<Rating, Double> o2) {
-                return (o1.getValue().compareTo(o2.getValue()));
+                //sort in the descending order
+                return (o2.getValue().compareTo(o1.getValue()));
             }
         });
 

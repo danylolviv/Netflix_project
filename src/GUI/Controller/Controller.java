@@ -4,6 +4,7 @@ package GUI.Controller;
 import BE.Movie;
 import BE.Rating;
 import BE.User;
+import BLL.util.MovieRecommenderBasic;
 import GUI.Model.MovieModel;
 import GUI.Model.RatingModel;
 import GUI.Model.UserModel;
@@ -59,16 +60,21 @@ public class Controller implements Initializable {
     @FXML
     private  ComboBox ratingComboBox;
 
+    //TableView for recommended Movies
+    @FXML
+    private  TableView<Movie> recommendedMoviesTable;
+
 
     private MovieModel movieModel;
     private UserModel userModel;
     private RatingModel ratingModel;
-
+    private MovieRecommenderBasic movieRecommendationBasic;
 
     public Controller() {
        movieModel= new MovieModel();
        userModel = new UserModel();
        ratingModel = new RatingModel();
+        movieRecommendationBasic =new MovieRecommenderBasic();
     }
 
     public void searchAllMovies(ActionEvent event) {
@@ -108,11 +114,13 @@ public class Controller implements Initializable {
 
     public void UpdateMovie(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/updateWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().
+                getResource("/GUI/View/updateWindow.fxml"));
         Parent root = loader.load();
 
         UpdateWindowController updateWindowController = loader.getController();
-        updateWindowController.setModel(movieModel, tableMovie.getSelectionModel().getSelectedItem());
+        updateWindowController.
+                setModel(movieModel, tableMovie.getSelectionModel().getSelectedItem());
         Stage stage = new Stage();
         stage.setTitle("Update");
         stage.setScene(new Scene(root));
@@ -126,11 +134,13 @@ public class Controller implements Initializable {
     }
 
     public void DeleteMovie(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/deleteMovie.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().
+                getResource("/GUI/View/deleteMovie.fxml"));
         Parent root = loader.load();
 
         DeleteMovieController deleteMovieController = loader.getController();
-        deleteMovieController.setModel(movieModel, tableMovie.getSelectionModel().getSelectedItem());
+        deleteMovieController.
+                setModel(movieModel, tableMovie.getSelectionModel().getSelectedItem());
 
         Stage stage = new Stage();
         stage.setTitle("Update");
@@ -146,7 +156,8 @@ public class Controller implements Initializable {
     @FXML
     private void CreateMovieWindow(ActionEvent event)  {
         //loader insteada of static instance of controller
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/createWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().
+                getResource("/GUI/View/createWindow.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -164,9 +175,16 @@ public class Controller implements Initializable {
         stage.show();
     }
 
+    /**
+     * when the user logs in recommend movies for him
+     * @param event
+     */
     public void selectUser(ActionEvent event) {
         selectedUser = usersTable.getSelectionModel().getSelectedItem();
-        currentUserField.setText("Current User: " + usersTable.getSelectionModel().getSelectedItem().getName());
+        currentUserField.setText("Current User: " +
+                usersTable.getSelectionModel().getSelectedItem().getName());
+        recommendedMoviesTable.setItems((ObservableList<Movie>)
+                movieRecommendationBasic.getRecommendedMovies());
     }
 
     public void rate(ActionEvent event) {
