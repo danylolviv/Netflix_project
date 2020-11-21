@@ -151,6 +151,19 @@ public class MovieDAO implements IMovieDataAccess {
 
     }
 
+    @Override
+    public Movie findMovieByID(int movieID) {
+        List<Movie> allMovies = getAllMovies();
+
+        for (Movie movie: allMovies
+             ) {
+            if(movieID==movie.getId())
+                return movie;
+
+        }
+        return null;
+    }
+
 
     private Movie createMovie(int releaseYear, String title, Movie movie) throws MrsDalException {
         Path path = new File(MOVIE_SOURCE).toPath();
