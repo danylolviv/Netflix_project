@@ -68,13 +68,12 @@ public class Controller implements Initializable {
     private MovieModel movieModel;
     private UserModel userModel;
     private RatingModel ratingModel;
-    private MovieRecommenderBasic movieRecommendationBasic;
+
 
     public Controller() {
        movieModel= new MovieModel();
        userModel = new UserModel();
        ratingModel = new RatingModel();
-        movieRecommendationBasic =new MovieRecommenderBasic();
     }
 
     public void searchAllMovies(ActionEvent event) {
@@ -92,6 +91,8 @@ public class Controller implements Initializable {
        usersColumn.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
        usersTable.setItems(userModel.getObservableUsers());
        setItemsComboBox();
+
+       recommendedMoviesTable.setItems(movieModel.getRecommendedMovies());
     }
 
 
@@ -183,9 +184,8 @@ public class Controller implements Initializable {
         selectedUser = usersTable.getSelectionModel().getSelectedItem();
         currentUserField.setText("Current User: " +
                 usersTable.getSelectionModel().getSelectedItem().getName());
-        //functionality doesn't work in the very weird way
-      // recommendedMoviesTable.setItems((ObservableList<Movie>) movieRecommendationBasic.getRecommendedMovies());
-        recommendedMoviesTable.setItems(movieModel.getRecommendedMovies());
+
+        recommendedMoviesTable.getItems().setAll(movieModel.getRecommendedMovies());
     }
 
     public void rate(ActionEvent event) {
