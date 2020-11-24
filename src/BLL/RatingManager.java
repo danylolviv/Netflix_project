@@ -2,7 +2,7 @@ package BLL;
 
 import BE.Movie;
 import BE.User;
-import DAL.RatingDAO;
+import DAL.file.RatingDAO;
 
 public class RatingManager {
     private RatingDAO ratingDAO;

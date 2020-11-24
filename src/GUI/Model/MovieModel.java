@@ -16,10 +16,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MovieModel implements Initializable {
+public class MovieModel  {
     private ObservableList moviesToBeViewed;
     private MovieManager movieManager;
-    private Controller controller;
     private MovieRecommenderBasic movieRecommenderBasic;
 
     private ObservableList moviesToBeRecommended;
@@ -45,6 +44,15 @@ public class MovieModel implements Initializable {
     public ObservableList<Movie> getObservableMovies(){
         return moviesToBeViewed;
     }
+
+    public ObservableList<Movie> getRecommendedObservableMovies() {
+        return moviesToBeRecommended;
+    }
+
+    public void loadRecommendedMovies() {
+        moviesToBeRecommended.addAll(movieRecommenderBasic.getRecommendedMovies());
+    }
+
     public List<Movie> getFoundMovies(String text){ return movieManager.searchForTheMovies(text);}
 
     public void addMovie(Movie movie)
@@ -72,12 +80,7 @@ public class MovieModel implements Initializable {
         movieManager.delete(movie);
     }
 
-    public ObservableList<Movie> getRecommendedMovies() {
-       return moviesToBeRecommended;
-    }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        moviesToBeRecommended.addAll(movieRecommenderBasic.getRecommendedMovies());
-    }
+
+
 }

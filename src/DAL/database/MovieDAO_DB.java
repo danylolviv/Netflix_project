@@ -1,6 +1,8 @@
 package DAL.database;
 
 import BE.Movie;
+import DAL.IMovieDataAccess;
+import DAL.exception.MrsDalException;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,7 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieDAO_DB {
+public class MovieDAO_DB implements IMovieDataAccess {
     private DatabaseConnector databaseConnector;
 
     public MovieDAO_DB() throws IOException {
@@ -39,6 +41,31 @@ public class MovieDAO_DB {
             ex.printStackTrace();
         }
         return allMovies;
+    }
+
+    @Override
+    public List<Movie> searchForTheMovies(String text) {
+        return null;
+    }
+
+    @Override
+    public void add(Movie movie) {
+
+    }
+
+    @Override
+    public void update(Movie movie) throws MrsDalException {
+
+    }
+
+    @Override
+    public void delete(Movie movie) throws MrsDalException {
+
+    }
+
+    @Override
+    public Movie createMovie(int releaseYear, String title, Movie movie) {
+        return null;
     }
 
 }

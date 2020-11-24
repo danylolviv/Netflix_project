@@ -27,7 +27,7 @@
       <Button layoutX="364.0" layoutY="428.0" mnemonicParsing="false" onAction="#rate" prefHeight="25.0" prefWidth="78.0" text="Rate" />
       <TableView fx:id="recommendedMoviesTable" layoutX="477.0" layoutY="275.0" prefHeight="221.0" prefWidth="294.0">
         <columns>
-          <TableColumn prefWidth="280.0" text="Recommended movies" />
+          <TableColumn fx:id="recommendedMoviesColumn" prefWidth="292.0" text="Recommended movies" />
         </columns>
       </TableView>
       <TableView fx:id="usersTable" layoutX="477.0" layoutY="53.0" prefHeight="211.0" prefWidth="294.0">

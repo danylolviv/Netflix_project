@@ -1,25 +1,32 @@
-package DAL;
+package DAL.file;
 
 import BE.Movie;
 import BE.Rating;
 import BE.User;
+import DAL.IRatingDataAccess;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class RatingDAO implements IRatingDataAccess {
     private static final String RATINGS_SOURCE =
             "D:\\onedrive2\\OneDrive - Erhvervsakademi Sydvest\\" +
                     "week 45\\netfilx\\Netflix_project\\data\\ratings.txt";
+    private static final int RECORD_SIZE = Integer.BYTES * 3;
 
     public void rate(Object selectedItem, Movie movie, User selectedUser) {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(RATINGS_SOURCE, true))) {
             String ratingString = selectedUser.getID() + ","+  movie.getId() + "," + selectedItem;
             bw.append(ratingString);
             bw.newLine();
-            // prepare for the next operations. its like
-            //cleaning after yourself
+            // prepare for the next operations
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -27,28 +34,16 @@ public class RatingDAO implements IRatingDataAccess {
 
     }
 
-    public List<Rating> getAllRatings()
-    {
-        List<Rating> allRatings = new ArrayList<>();
+    public List<Rating> getAllRatings()   {
 
-        try(BufferedReader br = new BufferedReader(new FileReader(new File(RATINGS_SOURCE))))
-        {
-            boolean hasLines = true;
-            while(hasLines){
-                String line = br.readLine();
-                if(line==null)
-                    hasLines=false;
-                if(hasLines)
-                {
-                    try{  allRatings.add(makeObjectFromString(line));} catch (NumberFormatException e) {
-                        //e.printStackTrace();
-                        System.out.println("Number format exception: "+ line);
-                    }
-                }
+        List<Rating> allRatings = new ArrayList<>();
+        try {
+
+            for (String line: Files.readAllLines(Path.of(RATINGS_SOURCE))){
+                Rating r =makeObjectFromString(line);
+                allRatings.add(r);
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,7 +57,7 @@ public class RatingDAO implements IRatingDataAccess {
         int ratedMovieID = Integer.parseInt(splittedLine[1]);
         int rating = Integer.parseInt(splittedLine[2]);
 
-       Rating rated = new Rating(userID, ratedMovieID, rating);
+        Rating rated = new Rating(userID, ratedMovieID, rating);
         return rated;
 
     }

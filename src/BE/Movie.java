@@ -1,15 +1,20 @@
 package BE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Movie {
 
     private  int id;
     private String title;
     private int year;
+    private List<Rating> ratings;
 
     public Movie(int id, String title, int year) {
         this.id = id;
         this.title = title;
         this.year = year;
+        this.ratings = new ArrayList<>();
     }
 
 
@@ -35,6 +40,14 @@ public class Movie {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 
     @Override

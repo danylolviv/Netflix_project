@@ -1,6 +1,7 @@
-package DAL;
+package DAL.file;
 
 import BE.Movie;
+import DAL.IMovieDataAccess;
 import DAL.exception.MrsDalException;
 
 import java.io.*;
@@ -24,7 +25,7 @@ public class MovieDAO implements IMovieDataAccess {
                     "week 45\\netfilx\\Netflix_project\\data\\movie_titles.txt";
 
 
-
+    @Override
     public List<Movie> getAllMovies()  {
         List<Movie> allMovies = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(new File(MOVIE_SOURCE))))
@@ -52,6 +53,7 @@ public class MovieDAO implements IMovieDataAccess {
         }
         return allMovies;
     }
+    @Override
     public List<Movie> searchForTheMovies(String text)
     {
         List<Movie> foundMovies = new ArrayList<>();
@@ -150,7 +152,7 @@ public class MovieDAO implements IMovieDataAccess {
         }
 
     }
-
+/*
     @Override
     public Movie getMovieByID(int movieID)  {
         List<Movie> allMovies = getAllMovies();
@@ -169,8 +171,10 @@ public class MovieDAO implements IMovieDataAccess {
 
     }
 
+ */
 
-    private Movie createMovie(int releaseYear, String title, Movie movie) throws MrsDalException {
+
+    public Movie createMovie(int releaseYear, String title, Movie movie)  {
         Path path = new File(MOVIE_SOURCE).toPath();
         int id = -1;
         try (BufferedWriter bw = Files.newBufferedWriter(path, StandardOpenOption.SYNC, StandardOpenOption.APPEND, StandardOpenOption.WRITE)) {
@@ -179,7 +183,7 @@ public class MovieDAO implements IMovieDataAccess {
             bw.newLine();
             bw.write(id + "," + releaseYear + "," + title);
         } catch (IOException ex) {
-            throw new MrsDalException("Could not create Movie.", ex);
+            ex.printStackTrace();
         }
         return new Movie(id, title, releaseYear);
     }
@@ -190,7 +194,7 @@ public class MovieDAO implements IMovieDataAccess {
      * @return
      * @throws IOException
      */
-    private int getNextAvailableMovieID() throws MrsDalException {
+    private int getNextAvailableMovieID()  {
         List<Movie> allMovies = getAllMovies();
         if (allMovies == null || allMovies.isEmpty()) {
             return 1;

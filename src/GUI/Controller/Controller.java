@@ -63,6 +63,9 @@ public class Controller implements Initializable {
     //TableView for recommended Movies
     @FXML
     private  TableView<Movie> recommendedMoviesTable;
+    @FXML
+    private  TableColumn<Movie, String> recommendedMoviesColumn;
+
 
 
     private MovieModel movieModel;
@@ -92,7 +95,8 @@ public class Controller implements Initializable {
        usersTable.setItems(userModel.getObservableUsers());
        setItemsComboBox();
 
-       recommendedMoviesTable.setItems(movieModel.getRecommendedMovies());
+       recommendedMoviesColumn.setCellValueFactory(cell-> new ReadOnlyObjectWrapper(cell.getValue().getTitle()));
+
     }
 
 
@@ -128,11 +132,13 @@ public class Controller implements Initializable {
         stage.show();
 
     }
-
+/*
     public int sendIDofTheSelectedMovie()
     {
         return tableMovie.getSelectionModel().getSelectedItem().getId();
     }
+
+ */
 
     public void DeleteMovie(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().
@@ -185,8 +191,11 @@ public class Controller implements Initializable {
         currentUserField.setText("Current User: " +
                 usersTable.getSelectionModel().getSelectedItem().getName());
 
-        recommendedMoviesTable.getItems().setAll(movieModel.getRecommendedMovies());
+        movieModel.loadRecommendedMovies();
+        recommendedMoviesTable.setItems(movieModel.getRecommendedObservableMovies());
     }
+
+
 
     public void rate(ActionEvent event) {
         ratingModel.rate(ratingComboBox.getSelectionModel().getSelectedItem(),

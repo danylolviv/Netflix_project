@@ -1,7 +1,7 @@
 package BLL;
 
 import BE.User;
-import DAL.UserDAO;
+import DAL.file.UserDAO;
 
 import java.io.IOException;
 import java.util.List;

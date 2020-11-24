@@ -1,13 +1,14 @@
-package DAL;
+package DAL.file;
 
 import BE.Movie;
 import BE.User;
+import DAL.IUserDataAccess;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+public class UserDAO implements IUserDataAccess {
     //get the list of the users
     private static final String USER_SOURCE =
             "D:\\onedrive2\\OneDrive - Erhvervsakademi Sydvest\\" +

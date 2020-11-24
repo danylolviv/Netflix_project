@@ -1,14 +1,17 @@
 package DAL;
 
 import BE.Movie;
+import BE.Rating;
+import BE.User;
 import DAL.exception.MrsDalException;
 
 import java.io.IOException;
 import java.util.List;
 
-public interface IMovieDataAccess {
+public interface IdalDataAccess {
+    //operations on Movies
     List<Movie> getAllMovies() throws IOException;
-   List<Movie> searchForTheMovies(String text);
+    List<Movie> searchForTheMovies(String text);
 
     void add(Movie movie);
 
@@ -18,8 +21,12 @@ public interface IMovieDataAccess {
 
     // Movie getMovieByID(int movieID);
 
-     Movie createMovie(int releaseYear, String title, Movie movie) ;
+    Movie createMovie(int releaseYear, String title, Movie movie) ;
 
+    //operations on ratings
+    List<Rating> getAllRatings();
 
+    //operations on users
+    List<User> getAllUsers();
 
 }
