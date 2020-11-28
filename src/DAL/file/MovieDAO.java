@@ -174,18 +174,18 @@ public class MovieDAO implements IMovieDataAccess {
  */
 
 
-    public Movie createMovie(int releaseYear, String title, Movie movie)  {
+    public Movie createMovie(int newReleaseYear, String newtitle, Movie movie)  {
         Path path = new File(MOVIE_SOURCE).toPath();
         int id = -1;
         try (BufferedWriter bw = Files.newBufferedWriter(path, StandardOpenOption.SYNC, StandardOpenOption.APPEND, StandardOpenOption.WRITE)) {
            // id = getNextAvailableMovieID();
             id= movie.getId();
             bw.newLine();
-            bw.write(id + "," + releaseYear + "," + title);
+            bw.write(id + "," + newReleaseYear + "," + newtitle);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return new Movie(id, title, releaseYear);
+        return new Movie(id, newtitle, newReleaseYear);
     }
 
     /**

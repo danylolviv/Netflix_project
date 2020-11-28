@@ -97,7 +97,8 @@ public class Controller implements Initializable {
        setItemsComboBox();
 
        recommendedMoviesColumn.setCellValueFactory(cell-> new ReadOnlyObjectWrapper(cell.getValue().getTitle()));
-
+/*
+adding rows in the tables manually
         AddFilesToDB addFilesToDB = null;
         try {
             addFilesToDB = new AddFilesToDB();
@@ -105,11 +106,13 @@ public class Controller implements Initializable {
             //addFilesToDB.addRatingsToDB();
 
 
-            addFilesToDB.addUsersToDB();
+            //addFilesToDB.addUsersToDB();
             //just added
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+ */
 
     }
 
