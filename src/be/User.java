@@ -1,23 +1,42 @@
-package be;
+package BE;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
-    int id;
-    String name;
-    int age;
+    private int ID;
+    private String name;
+    private List<Movie> ratedMovies;
 
-    public User(int id, String name, int age ){
-        this.id = id;
+    public User(int ID, String name) {
+        this.ID = ID;
         this.name = name;
-        this.age = age;
+        this.ratedMovies = new ArrayList<>();
     }
 
-    public int getUserId(){
-        return id;
+    public void addRatedMovie(Movie movie)
+    {
+        ratedMovies.add(movie);
     }
 
-    public  void writeAReview(){
-
+    public int getID() {
+        return ID;
     }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + ID +" Name: "+ name;
+    }
 }
