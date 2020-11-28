@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.Controller">
+   <children>
+      <TextField fx:id="typeField" layoutX="16.0" layoutY="14.0" prefHeight="32.0" prefWidth="601.0" />
+      <Button fx:id="searchButton" layoutX="643.0" layoutY="18.0" mnemonicParsing="false" onAction="#searchAllMovies" prefHeight="25.0" prefWidth="84.0" text="Search" />
+      <Button fx:id="createButton" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" onAction="#CreateMovieWindow" prefHeight="25.0" prefWidth="78.0" text="create" />
+      <Button fx:id="updateButton" layoutX="115.0" layoutY="383.0" mnemonicParsing="false" onAction="#UpdateMovie" prefHeight="25.0" prefWidth="69.0" text="Update" />
+      <Button fx:id="delateButton" layoutX="205.0" layoutY="383.0" mnemonicParsing="false" onAction="#DeleteMovie" prefHeight="25.0" prefWidth="78.0" text="Delete" />
+      <Button fx:id="enterButton" layoutX="292.0" layoutY="383.0" mnemonicParsing="false" onAction="#LoadAll" prefHeight="25.0" prefWidth="168.0" text="Load All" />
+      <TableView fx:id="tableMovie" layoutX="20.0" layoutY="53.0" prefHeight="315.0" prefWidth="448.0">
+        <columns>
+          <TableColumn fx:id="columnId" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="columnYear" prefWidth="75.0" text="Year" />
+            <TableColumn fx:id="columnTitle" prefWidth="297.0" text="Title" />
+        </columns>
+      </TableView>
+      <Button layoutX="16.0" layoutY="428.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="168.0" text="Receive recommendations" />
+      <Button layoutX="364.0" layoutY="428.0" mnemonicParsing="false" onAction="#rate" prefHeight="25.0" prefWidth="78.0" text="Rate" />
+      <TableView fx:id="recommendedMoviesTable" layoutX="477.0" layoutY="275.0" prefHeight="221.0" prefWidth="294.0">
+        <columns>
+          <TableColumn fx:id="recommendedMoviesColumn" prefWidth="292.0" text="Recommended movies" />
+        </columns>
+      </TableView>
+      <TableView fx:id="usersTable" layoutX="477.0" layoutY="53.0" prefHeight="211.0" prefWidth="294.0">
+        <columns>
+          <TableColumn fx:id="usersColumn" prefWidth="293.0" text="Users" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="ratingComboBox" layoutX="197.0" layoutY="428.0" prefWidth="150.0" />
+      <Text fx:id="currentUserField" layoutX="20.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current User: " wrappingWidth="212.13671875" />
+      <Button layoutX="247.0" layoutY="468.0" mnemonicParsing="false" onAction="#selectUser" prefHeight="25.0" prefWidth="140.0" text="Select a user" />
+   </children>
+</AnchorPane>
