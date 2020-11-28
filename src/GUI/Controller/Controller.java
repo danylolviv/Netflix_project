@@ -5,6 +5,7 @@ import BE.Movie;
 import BE.Rating;
 import BE.User;
 import BLL.util.MovieRecommenderBasic;
+import DAL.database.AddFilesToDB;
 import GUI.Model.MovieModel;
 import GUI.Model.RatingModel;
 import GUI.Model.UserModel;
@@ -96,6 +97,19 @@ public class Controller implements Initializable {
        setItemsComboBox();
 
        recommendedMoviesColumn.setCellValueFactory(cell-> new ReadOnlyObjectWrapper(cell.getValue().getTitle()));
+
+        AddFilesToDB addFilesToDB = null;
+        try {
+            addFilesToDB = new AddFilesToDB();
+            //addFilesToDB.addMoviesToDB();
+            //addFilesToDB.addRatingsToDB();
+
+
+            addFilesToDB.addUsersToDB();
+            //just added
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

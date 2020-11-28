@@ -7,6 +7,7 @@ import DAL.file.MovieDAO;
 import DAL.exception.MrsDalException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieManager {
@@ -19,7 +20,7 @@ public class MovieManager {
 
     }
     //MovieDAO operations
-    public List<Movie> getAllMovies() throws IOException {return daLcontroller.getAllMovies();}
+    public List<Movie> getAllMovies() {return daLcontroller.getAllMovies();}
     public List<Movie> searchForTheMovies(String text) { return daLcontroller.searchForTheMovies(text);}
 
 
@@ -38,4 +39,5 @@ public class MovieManager {
     public void delete(Movie movie) throws MrsDalException {
         daLcontroller.delete(movie);
     }
+
 }

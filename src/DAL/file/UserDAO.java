@@ -24,7 +24,7 @@ public class UserDAO implements IUserDataAccess {
                 String line = br.readLine();
                 if(line==null)
                     hasLines=false;
-                if(hasLines)
+                if(hasLines && !line.isBlank())
                 {
                     try{  allUsers.add(makeObjectFromString(line));} catch (NumberFormatException e) {
                         //e.printStackTrace();

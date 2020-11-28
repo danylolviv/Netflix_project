@@ -18,6 +18,19 @@ public class Movie {
     }
 
 
+
+    public double getAverageRating()  {
+
+        double sumRating=0.0;
+
+        for(Rating r : ratings)
+            sumRating+= r.getRating();
+
+        return (sumRating/ratings.size());
+    }
+
+
+
     public int getId() {
         return id;
     }
@@ -48,6 +61,10 @@ public class Movie {
 
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
+    }
+    public void addRating(Rating rating)
+    {
+        this.ratings.add(rating);
     }
 
     @Override

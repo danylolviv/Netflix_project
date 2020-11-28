@@ -1,5 +1,6 @@
 package DAL.database;
 
+
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -12,15 +13,13 @@ public class DatabaseConnector {
 
     private SQLServerDataSource dataSource;
 
-    public DatabaseConnector() throws IOException
+    public DatabaseConnector()
     {
-        Properties props = new Properties();
-        props.load(new FileReader("DBSettings.txt"));
         dataSource = new SQLServerDataSource();
-        dataSource.setDatabaseName(props.getProperty("database"));
-        dataSource.setUser(props.getProperty("user"));
-        dataSource.setPassword(props.getProperty("password"));
-        dataSource.setServerName(props.getProperty("server"));
+        dataSource.setServerName("10.176.111.31");
+        dataSource.setUser("CSe20B_8");
+        dataSource.setPassword("potatoe2020");
+        dataSource.setDatabaseName("JCtest");
     }
 
     public Connection getConnection() throws SQLServerException

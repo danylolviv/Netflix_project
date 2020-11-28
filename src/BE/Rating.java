@@ -1,8 +1,8 @@
 package BE;
 
 public class Rating {
-    private int userID;
-    private int ratedMovieID;
+    private int userID=-1;
+    private int ratedMovieID=-1;
     //rating should be in the scale from -5 to 5
     private int rating=-1;
 
@@ -11,6 +11,8 @@ public class Rating {
         this.ratedMovieID = ratedMovieID;
         this.rating = rating;
     }
+
+
 
     public int getUserID() {
         return userID;

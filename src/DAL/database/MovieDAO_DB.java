@@ -19,6 +19,7 @@ public class MovieDAO_DB implements IMovieDataAccess {
         databaseConnector= new DatabaseConnector();
     }
 
+
     public List<Movie> getAllMovies()
     {
         ArrayList<Movie> allMovies = new ArrayList<>();

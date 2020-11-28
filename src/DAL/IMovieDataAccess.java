@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface IMovieDataAccess {
-    List<Movie> getAllMovies() throws IOException;
+    List<Movie> getAllMovies() ;
    List<Movie> searchForTheMovies(String text);
 
     void add(Movie movie);

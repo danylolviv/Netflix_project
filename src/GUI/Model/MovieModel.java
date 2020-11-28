@@ -33,11 +33,7 @@ public class MovieModel  {
     }
     public void loadMovies()
     {
-        try {
-            moviesToBeViewed.addAll(movieManager.getAllMovies());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        moviesToBeViewed.addAll(movieManager.getAllMovies());
     }
 
 
@@ -50,7 +46,7 @@ public class MovieModel  {
     }
 
     public void loadRecommendedMovies() {
-        moviesToBeRecommended.addAll(movieRecommenderBasic.getRecommendedMovies());
+        moviesToBeRecommended.addAll(movieRecommenderBasic.getMoviesWithRatings());
     }
 
     public List<Movie> getFoundMovies(String text){ return movieManager.searchForTheMovies(text);}

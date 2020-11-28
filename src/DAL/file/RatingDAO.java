@@ -19,6 +19,8 @@ public class RatingDAO implements IRatingDataAccess {
     private static final String RATINGS_SOURCE =
             "D:\\onedrive2\\OneDrive - Erhvervsakademi Sydvest\\" +
                     "week 45\\netfilx\\Netflix_project\\data\\ratings.txt";
+
+
     private static final int RECORD_SIZE = Integer.BYTES * 3;
 
     public void rate(Object selectedItem, Movie movie, User selectedUser) {
@@ -34,33 +36,21 @@ public class RatingDAO implements IRatingDataAccess {
 
     }
 
-    public List<Rating> getAllRatings()   {
-
-        List<Rating> allRatings = new ArrayList<>();
+    public List<Rating> getAllRatings() {
+        List<Rating> ratingList = new ArrayList<>();
+        List<String> ratingLines = null;
         try {
-
-            for (String line: Files.readAllLines(Path.of(RATINGS_SOURCE))){
-                Rating r =makeObjectFromString(line);
-                allRatings.add(r);
-            }
-
+             ratingLines = Files.readAllLines(Path.of(RATINGS_SOURCE));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return allRatings;
 
+        for(String line: ratingLines)
+        {
+            String[] split = line.split(",");
+            ratingList.add(new Rating(Integer.parseInt(split[0]),
+                    Integer.parseInt(split[1]), Integer.parseInt(split[2])));
+        }
+        return ratingList;
     }
-
-    private Rating makeObjectFromString(String line) {
-        String[] splittedLine = line.split(",");
-        int userID= Integer.parseInt(splittedLine[0]);
-        int ratedMovieID = Integer.parseInt(splittedLine[1]);
-        int rating = Integer.parseInt(splittedLine[2]);
-
-        Rating rated = new Rating(userID, ratedMovieID, rating);
-        return rated;
-
-    }
-
-
 }

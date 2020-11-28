@@ -23,7 +23,7 @@ public class DALcontroller implements IdalDataAccess{
     }
 
     @Override
-    public List<Movie> getAllMovies() throws IOException {
+    public List<Movie> getAllMovies()  {
         return movieAccess.getAllMovies();
     }
 
